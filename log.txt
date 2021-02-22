@@ -1,0 +1,12 @@
+/127.0.0.1;2021-02-22T15:27:32.845529;/users/fengyunlin/Documents/LearnHTML/about.html;200
+/127.0.0.1;2021-02-22T15:40:47.853156;/users/fengyunlin/Documents/LearnHTML/index.html;200
+/127.0.0.1;2021-02-22T15:40:57.882345;/users/fengyunlin/Documents/LearnHTML/about.html;200
+127.0.0.1;Mon, 22 02 2021 17:51:20 GMT;/index.html;null
+127.0.0.1;Mon, 22 02 2021 17:51:22 GMT;/index.html;null
+127.0.0.1;Mon, 22 02 2021 17:53:24 GMT;/index.html;null
+127.0.0.1;Mon, 22 02 2021 17:57:04 GMT;/index.html;404
+127.0.0.1;Mon, 22 02 2021 17:57:35 GMT;/index.html;404
+127.0.0.1;Mon, 22 02 2021 17:58:11 GMT;/users/fengyunlin/Documents/index.html;404
+127.0.0.1;Mon, 22 02 2021 17:58:53 GMT;/users/fengyunlin/Documents/LearnHTML/index.html;200
+192.168.3.100;Mon, 22 02 2021 18:00:21 GMT;/users/fengyunlin/Documents/LearnHTML/index.html;200
+192.168.3.100;Mon, 22 02 2021 18:00:21 GMT;/users/fengyunlin/Documents/LearnHTML/favicon.ico;404
