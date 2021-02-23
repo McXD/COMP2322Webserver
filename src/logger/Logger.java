@@ -27,7 +27,7 @@ public class Logger implements Runnable{
         //write one record to the log file
         try{
             Record r = queue.take();
-            System.out.println(r.toString());
+            System.out.print(r.toString());
             Files.writeString(file.toPath(), r.toString(), StandardOpenOption.APPEND);
         }catch(InterruptedException | IOException ex){
             ex.printStackTrace();

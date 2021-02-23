@@ -2,14 +2,35 @@ package httpObject;
 
 import exception.ClientException;
 
-import java.util.Locale;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
+/**
+ * This Class represents a HTTP request message
+ */
 public class HTTPRequest {
+    public void setStartline(RequestStartLine startline) {
+        this.startline = startline;
+    }
+
+    public void setHeader(Header header) {
+        this.header = header;
+    }
+
+    public void setEntity(byte[] entity) {
+        this.entity = entity;
+    }
+
     private RequestStartLine startline;
     private Header header;
-    private Object entity;
+    private byte[] entity;
 
+    /**
+     * Parse the request string
+     * Entity should be UTF-8 encoded string
+     * @param requestString
+     * @throws ClientException
+     */
     public HTTPRequest(String requestString) throws ClientException {
         Scanner sc = new Scanner(requestString);
 
@@ -19,14 +40,19 @@ public class HTTPRequest {
         if (!sc.hasNextLine()) throw new ClientException(400 , "Bad Request", "headers not found");
         StringBuilder headerString = new StringBuilder();
         String line;
-        while (sc.hasNextLine() && !(line = sc.nextLine()).equals("")){
+        while (sc.hasNextLine() && !(line = sc.nextLine()).equals("")){ //an empty line indicates end of header
             headerString.append(line + "\r\n");
         }
-        System.out.println(headerString.toString());
         this.header = new Header(headerString.toString());
 
-        if (sc.hasNext()) entity = sc.next();
+        if (sc.hasNext()) entity = sc.next().getBytes(StandardCharsets.UTF_8);
         else entity = null;
+    }
+
+    public HTTPRequest(RequestStartLine startLine, Header header, byte[] entity){
+        this.startline = startLine;
+        this.header = header;
+        this.entity = entity;
     }
 
     @Override
@@ -34,7 +60,7 @@ public class HTTPRequest {
         StringBuilder sb = new StringBuilder();
         sb.append(startline);
         sb.append(header + "\r\n");
-        sb.append("[...Entity Body...]");
+        if (entity != null) sb.append("[...Entity Body...](" + entity.length + ") bytes");
 
         return sb.toString();
     }
@@ -43,8 +69,8 @@ public class HTTPRequest {
         return this.startline.getMethod();
     }
 
-    public String getUrl(){
-        return this.startline.getUrl();
+    public String getPath(){
+        return this.startline.getPath();
     }
 
     public String getVersion(){
@@ -54,7 +80,7 @@ public class HTTPRequest {
     public String getHeader(String name){
         //case-insensitive
         for (HeaderPair hp : header){
-            if (hp.getName().toLowerCase(Locale.ROOT).compareTo(name.toLowerCase(Locale.ROOT)) == 0){
+            if (hp.getName().toLowerCase().compareTo(name.toLowerCase()) == 0){
                 return hp.getValue();
             }
         }

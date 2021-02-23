@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/COMP2322Webserver(single-threaded).iml" filepath="$PROJECT_DIR$/COMP2322Webserver(single-threaded).iml" />
+      <module fileurl="file://$PROJECT_DIR$/COMP2322Webserver.iml" filepath="$PROJECT_DIR$/COMP2322Webserver.iml" />
     </modules>
   </component>
 </project>

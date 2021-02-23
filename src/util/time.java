@@ -9,6 +9,7 @@ import java.util.Date;
 public class time {
     public static String convertLongTime(long time){
         Date date = new Date(time);
+        date.setHours(date.getHours()-8);
         Format format = new SimpleDateFormat("EEE, dd MM yyyy HH:mm:ss 'GMT'");
         return format.format(date);
     }
@@ -16,10 +17,11 @@ public class time {
     public static LocalDateTime convertLocalTime(String time){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE, dd MM yyyy HH:mm:ss 'GMT'");
         LocalDateTime ldt = LocalDateTime.parse(time, formatter);
-        return ldt;
+        return ldt.minusHours(8);
     }
 
     public static String convertString(LocalDateTime time){
+        time = time.minusHours(8);
         return time.format(DateTimeFormatter.ofPattern("EEE, dd MM yyyy HH:mm:ss 'GMT'"));
     }
 

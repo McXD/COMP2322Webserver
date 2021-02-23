@@ -1,7 +1,8 @@
 package httpObject;
 
-import java.util.StringTokenizer;
-
+/**
+ * This Class represents the start line in a typical response message
+ */
 public class ResponseStartLine {
     private String version;
     private int code;

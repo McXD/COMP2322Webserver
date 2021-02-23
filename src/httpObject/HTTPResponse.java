@@ -2,12 +2,24 @@ package httpObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 
 public class HTTPResponse {
     private ResponseStartLine startLine;
     private Header header;
+
+    public void setStartLine(ResponseStartLine startLine) {
+        this.startLine = startLine;
+    }
+
+    public void setHeader(Header header) {
+        this.header = header;
+    }
+
+    public void setEntity(byte[] entity) {
+        this.entity = entity;
+    }
+
     private byte[] entity;
 
 
@@ -19,7 +31,7 @@ public class HTTPResponse {
 
     @Override
     public String toString(){
-        return startLine.toString() + header.toString() + "\r\n" + "[...Entity Body...]";
+        return startLine.toString() + header.toString() + "\r\n" + new String(entity, StandardCharsets.US_ASCII);
     }
 
     public byte[] toByteArray(){

@@ -4,17 +4,25 @@ import exception.ClientException;
 
 import java.util.StringTokenizer;
 
+/**
+ * This Class represents the start line in a typical HTTP request message
+ */
 public class RequestStartLine {
     private String method;
-    private String url;
+    private String path;
     private String version;
 
+    /**
+     * Parse the startLine string
+     * @param line the start line in the request message (with or without /r/n)
+     * @throws ClientException when token count is not 3 (400 Bad Request)
+     */
     public RequestStartLine(String line) throws ClientException {
         StringTokenizer sk = new StringTokenizer(line);
         if (sk.countTokens() !=3) throw new ClientException(400, "Bad Request", "malformed start-line: " + line);
 
         this.method = sk.nextToken();
-        this.url = sk.nextToken();
+        this.path = sk.nextToken();
         this.version = sk.nextToken();
     }
 
@@ -22,8 +30,8 @@ public class RequestStartLine {
         return method;
     }
 
-    public String getUrl() {
-        return url;
+    public String getPath() {
+        return path;
     }
 
     public String getVersion() {
@@ -32,7 +40,7 @@ public class RequestStartLine {
 
     @Override
     public String toString() {
-        return method + " " + url + " " + version + "\r\n";
+        return method + " " + path + " " + version + "\r\n";
     }
 
     public static void main(String[] args){
